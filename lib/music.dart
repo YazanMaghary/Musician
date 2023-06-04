@@ -12,6 +12,7 @@ class Music extends StatefulWidget {
 
 class _MusicState extends State<Music> {
   late FlutterMidi flutterMidi;
+  String? title = "PIANO";
   var tuneList = [
     "Piano",
     "Guitars",
@@ -45,7 +46,7 @@ class _MusicState extends State<Music> {
         accidentalColor: Colors.black,
         keyWidth: 50,
         noteRange: NoteRange.forClefs([
-          Clef.Treble,
+          Clef.Bass,
         ]),
         onNotePositionTapped: (position) {
           flutterMidi.playMidiNote(midi: position.pitch);
@@ -57,7 +58,7 @@ class _MusicState extends State<Music> {
   AppBar buildAppBar() {
     return AppBar(
       backgroundColor: const Color(0xffff004f),
-      title: const Text("Musical Tunes"),
+      title: Text("$title"),
       centerTitle: true,
       actions: [
         buildDropdownButton(),
@@ -90,6 +91,7 @@ class _MusicState extends State<Music> {
         if (newValue != null) {
           setState(() {
             dropdownValue = newValue;
+            title = newValue.toUpperCase();
             load("assets/sf2/$dropdownValue.SF2");
           });
         }
