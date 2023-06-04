@@ -30,7 +30,9 @@ class _MusicState extends State<Music> {
   void load(String asset) async {
     try {
       ByteData byte = await rootBundle.load(asset);
-      await flutterMidi.prepare(sf2: byte);
+      await flutterMidi.prepare(
+          sf2: byte,
+          name: 'assets/sf2/$dropdownValue.SF2'.replaceAll('assets/sf2/', ''));
     } catch (e) {
       print('Failed to load asset: $asset');
     }
